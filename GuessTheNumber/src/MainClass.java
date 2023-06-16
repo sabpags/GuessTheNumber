@@ -122,6 +122,6 @@ public class MainClass{
 
 	public static void resetNumber() {
 		numberToGuess = (int) (Math.random() * slider.getValue());
-		// System.out.println(numberToGuess);
+		System.out.println(numberToGuess);
 	}
 }
