@@ -3,6 +3,9 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/*
+ * Number guessing game
+*/
 public class MainClass{
 
 	static JFrame frame;
@@ -15,7 +18,7 @@ public class MainClass{
 
 	public static void main(String[] args) {
 
-		//Creating the Frame
+		//Creating the JFrame
 		frame = new JFrame("Number Guessing Game");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,300);
@@ -24,7 +27,7 @@ public class MainClass{
 		frame.getContentPane().add(BorderLayout.PAGE_START, title);
 
 		//Creating the panel for guessing functions
-		JPanel panel = new JPanel(); // the panel is not visible in output
+		JPanel panel = new JPanel();
 		JLabel label = new JLabel("Enter your guess: ");
 		tf = new JTextField(10); // accepts up to 10 characters
 		JButton send = new JButton("Guess");
@@ -40,29 +43,15 @@ public class MainClass{
 				again.setVisible(true);
 			} 
 		});
-		panel.add(label); // Components Added using Flow Layout
+		panel.add(label);
 		panel.add(tf);
 		panel.add(send);
 		panel.add(reset);
-
-		// Add Components to the frame.
 		frame.getContentPane().add(panel);
 
+		// Create Panel for texts and slider
 		JPanel main = new JPanel();
 		slider = new JSlider();
-		rangeLabel = new JLabel("The number is between 0 and " + slider.getValue(),SwingConstants.CENTER);
-		guessLabel = new JLabel("", SwingConstants.CENTER);
-		again = new JButton("Play again?");
-		again.setVisible(false);
-		again.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
-				tf.setText("");
-				guessLabel.setText("");
-				again.setVisible(false);
-				resetNumber();
-			} 
-		});
-
 		// Paint the ticks and tracks
 		slider.setPaintTrack(true);
 		slider.setPaintTicks(true);
@@ -79,6 +68,18 @@ public class MainClass{
 				resetNumber();
 			}
 		});
+		rangeLabel = new JLabel("The number is between 0 and " + slider.getValue(),SwingConstants.CENTER);
+		guessLabel = new JLabel("", SwingConstants.CENTER);
+		again = new JButton("Play again?");
+		again.setVisible(false);
+		again.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				tf.setText("");
+				guessLabel.setText("");
+				again.setVisible(false);
+				resetNumber();
+			} 
+		});
 
 		main.add(guessLabel);
 		main.add(again);
@@ -92,6 +93,11 @@ public class MainClass{
 		frame.setVisible(true);
 	}
 
+	/* 
+	 * If value entered is an Integer, system checks if user correctly guessed.
+	 * Provides hint if user if greater or less than the number.
+	 * If user guesses correctly, congratulation message appears and prompts user to play again if desired.
+	*/
 	public static void checkNumberGuess() {
 		try {
 			if (Integer.parseInt(tf.getText()) < numberToGuess) {
