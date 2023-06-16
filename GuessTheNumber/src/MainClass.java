@@ -22,6 +22,7 @@ public class MainClass{
 		frame = new JFrame("Number Guessing Game");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,300);
+		frame.setResizable(false);
 
 		JLabel title = new JLabel("Welcome to the Number Guessing Game", SwingConstants.CENTER);
 		frame.getContentPane().add(BorderLayout.PAGE_START, title);
